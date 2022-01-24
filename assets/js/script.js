@@ -6,6 +6,33 @@ $(document).ready(function() {
       localStorage.setItem(time, value);
     });
   
+    function hourUpdater() {
+      // Check current hour (0-24)
+      var currentHour = moment().hours();
+  
+      // Check timeblocks for past, present, or current time
+      $(".time-block").each(function() {
+        var blockHour = parseInt($(this).attr("id").split("-")[1]);
+        if (blockHour < currentHour) {
+          $(this).addClass("past");
+        } 
+        else if (blockHour === currentHour) {
+          $(this).removeClass("past");
+          $(this).addClass("present");
+        } 
+        else {
+          $(this).removeClass("past");
+          $(this).removeClass("present");
+          $(this).addClass("future");
+        }
+      });
+    }
+  
+    hourUpdater();
+  
+    // Check if current time needs updated
+    var interval = setInterval(hourUpdater, 15000);
+  
     // Load from local storage
     $("#time-9 .description").val(localStorage.getItem("time-9"));
     $("#time-10 .description").val(localStorage.getItem("time-10"));
