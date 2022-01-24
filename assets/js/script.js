@@ -43,4 +43,7 @@ $(document).ready(function() {
     $("#time-15 .description").val(localStorage.getItem("time-15"));
     $("#time-16 .description").val(localStorage.getItem("time-16"));
     $("#time-17 .description").val(localStorage.getItem("time-17"));
+  
+    // Show date on top of page
+    $("#currentDay").text(moment().format("dddd, MMMM Do"));
   });
